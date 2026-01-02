@@ -1,0 +1,7 @@
+*.ipynb
+*.pyc
+data/
+old_notebooks/
+protein_moe/
+results/
+.ipynb_checkpoints/
