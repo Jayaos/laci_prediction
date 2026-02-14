@@ -1,6 +1,6 @@
 ## A Complete Map of LacI
 
-This repository contains codes for ligand responsiveness and functional repression prediction in the paper ["A Complete Map of LacI"](https://www.nature.com/articles/s41467-025-64457-0).
+This repository contains codes for ligand responsiveness and functional repression prediction in the paper ["A Complete Deep Mutational Map of the Lactose Repressor and Quantification of Allosteric Communication"](https://github.com/Jayaos/LacI_prediction).
 
 
 ### Installation
@@ -9,13 +9,14 @@ The codes were written in Python 3.9.13. If you want to implement on your local 
 1. Clone this repository
 
         git clone https://github.com/Jayaos/LacI_prediction
-2. Move to the directory where you clone this repository and install requirements using pip
+
+2. Move to the directory where you clone this repository and install the required packages using pip
 
         pip install -r requirements.txt
 
 
 ### Implementation example
-We provide a Colab notebook example with step-by-step instructions for implementing algorithmic enumeration of 3-input Tpro circuits.
+We provide a Colab notebook example with step-by-step instructions.
 
 <a target="_blank" href="https://colab.research.google.com/github/Jayaos/TPro/blob/master/examples/example_script.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
