@@ -9,3 +9,4 @@ results/
 /src/esm_pro/
 /src/esmc_bt/
 /src/esmc_zeroshot/
+/src/unirep_finetune.py
