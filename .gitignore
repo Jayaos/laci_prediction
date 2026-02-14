@@ -1,6 +1,14 @@
 *.ipynb
 *.pyc
-data/
+data/DMS_ProteinGym_substitutions/
+data/garuss/
+data/DMS_substitutions.csv
+data/Ia5_heatmap.csv
+data/Ia5_single_mutation_data.pkl
+data/Ia9_heatmap.csv
+data/Ia9_single_mutation_data.pkl
+data/ross.csv
+data/wilson-ross-combined.csv
 old_notebooks/
 protein_moe/
 results/
