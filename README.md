@@ -24,9 +24,19 @@ We provide a Colab notebook example with step-by-step instructions for implement
 
 ## How to Cite
 
-    A Complete Map of LacI
-        Zachary Herde
-        under review
+```bibtex
+@article{herde2026,
+  title={A complete deep mutational map of the lactose repressor and quantification of allosteric communication},
+  author={Herde, Zachary D and Kay, Valerie E and Lee, Junghwan and Selvakumar, Raja and Bommarius, Bettina and Davis, Caitlyn and
+  Berry, Andre and Bowman, Nathan and Xie, Yao and Realff, Matthew J and Wilson, Corey J},
+  journal={under review},
+  volume={},
+  number={},
+  pages={},
+  year={},
+  publisher={}
+}
+```
 
 
 ## License
