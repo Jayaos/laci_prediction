@@ -1,6 +1,6 @@
 ## A Complete Map of LacI
 
-This repository contains codes for ligand responsiveness and functional repression prediction in the paper ["A Complete Deep Mutational Map of the Lactose Repressor and Quantification of Allosteric Communication"](https://github.com/Jayaos/LacI_prediction).
+This repository contains codes for the computational experiments in the paper ["A Complete Deep Mutational Map of the Lactose Repressor and Quantification of Allosteric Communication"](https://github.com/Jayaos/LacI_prediction).
 
 
 ### Installation
