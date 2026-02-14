@@ -6,3 +6,6 @@ protein_moe/
 results/
 .ipynb_checkpoints/
 /src/baselines/
+/src/esm_pro/
+/src/esmc_bt/
+/src/esmc_zeroshot/
