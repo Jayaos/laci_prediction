@@ -13,7 +13,7 @@ from torchmetrics.classification import BinaryAUROC
 from torchmetrics.regression import SpearmanCorrCoef
 
 
-def finetune_confit(training_dataset, validation_dataset, model, batch_converter,
+def finetune_bt(training_dataset, validation_dataset, model, batch_converter,
                     max_epoch, batch_size, learning_rate, lambda_reg, early_stop, device="cpu"):
     
     model_reg = copy.deepcopy(model)
@@ -199,7 +199,7 @@ def finetune_confit(training_dataset, validation_dataset, model, batch_converter
     return model, result_dict
 
 
-def evaluate_confit(testing_dataset, model, batch_converter, task, device):
+def evaluate_bt(testing_dataset, model, batch_converter, task, device):
 
     testing_dataloader = DataLoader(testing_dataset, batch_size=1, shuffle=False, 
                                     collate_fn=collate_function_sequence_dataset, drop_last=False)
@@ -230,7 +230,7 @@ def evaluate_confit(testing_dataset, model, batch_converter, task, device):
     return CRITERION.compute().item()
 
 
-def nfold_finetune_confit(data_dir, saving_dir, file_name, pretrained_model, nfold, max_epoch, batch_size, 
+def nfold_finetune_bt(data_dir, saving_dir, file_name, pretrained_model, nfold, max_epoch, batch_size, 
                      learning_rate, lambda_reg, early_stop, device):
 
     nfold_result_dict = dict()
@@ -270,19 +270,19 @@ def nfold_finetune_confit(data_dir, saving_dir, file_name, pretrained_model, nfo
             raise ValueError("wrong pretrained model input")
         print("loading pre-trained ESM2 done")
 
-        best_model, result_dict = finetune_confit(training_dataset, validation_dataset, ESM2_model, batch_converter,
+        best_model, result_dict = finetune_bt(training_dataset, validation_dataset, ESM2_model, batch_converter,
                                                     max_epoch, batch_size, learning_rate, lambda_reg, 
                                                     early_stop, device)
 
         nfold_result_dict[n] = copy.deepcopy(result_dict)
-        torch.save(best_model.state_dict(), saving_dir+"ESM2_confit_fold{}_model.pt".format(n))
+        torch.save(best_model.state_dict(), saving_dir+"ESM2_bt_fold{}_model.pt".format(n))
 
-    save_data(saving_dir+"ESM2_confit_result_dict.pkl", nfold_result_dict)
+    save_data(saving_dir+"ESM2_bt_result_dict.pkl", nfold_result_dict)
 
 
-def nfold_evaluate_confit_single_mutation(saved_dir, data_dir, file_name, pretrained_model, nfold, task, device):
+def nfold_evaluate_bt_single_mutation(saved_dir, data_dir, file_name, pretrained_model, nfold, task, device):
     """
-    evaluate n-fold saved confit models on the given task
+    evaluate n-fold saved bt models on the given task
     """
 
     test_metric_list = []
@@ -317,9 +317,9 @@ def nfold_evaluate_confit_single_mutation(saved_dir, data_dir, file_name, pretra
             raise ValueError("wrong pretrained model input")
         print("loading pre-trained ESM2 done")
 
-        ESM2_model.load_state_dict(torch.load(saved_dir + "ESM2_confit_fold{}_model.pt".format(n)))
+        ESM2_model.load_state_dict(torch.load(saved_dir + "ESM2_bt_fold{}_model.pt".format(n)))
 
-        test_metric = evaluate_confit(testing_dataset, ESM2_model, batch_converter, task, device)
+        test_metric = evaluate_bt(testing_dataset, ESM2_model, batch_converter, task, device)
         test_metric_list.append(test_metric)
 
     if task == "binary":
@@ -334,9 +334,9 @@ def nfold_evaluate_confit_single_mutation(saved_dir, data_dir, file_name, pretra
     return test_metric_list
 
 
-def nfold_evaluate_confit_multiple_mutations(saved_dir, data_dir, pretrained_model, nfold, task, device):
+def nfold_evaluate_bt_multiple_mutations(saved_dir, data_dir, pretrained_model, nfold, task, device):
     """
-    evaluate n-fold saved confit models on the given task
+    evaluate n-fold saved bt models on the given task
     """
 
     test_metric_list = []
@@ -362,9 +362,9 @@ def nfold_evaluate_confit_multiple_mutations(saved_dir, data_dir, pretrained_mod
             raise ValueError("wrong pretrained model input")
         print("loading pre-trained ESM2 done")
 
-        ESM2_model.load_state_dict(torch.load(saved_dir + "ESM2_confit_fold{}_model.pt".format(n)))
+        ESM2_model.load_state_dict(torch.load(saved_dir + "ESM2_bt_fold{}_model.pt".format(n)))
 
-        test_metric = evaluate_confit(testing_dataset, ESM2_model, batch_converter, task, device)
+        test_metric = evaluate_bt(testing_dataset, ESM2_model, batch_converter, task, device)
         test_metric_list.append(test_metric)
 
     if task == "binary":
