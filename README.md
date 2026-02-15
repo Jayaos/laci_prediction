@@ -17,7 +17,9 @@ The codes were written in Python 3.9.13. If you want to implement on your local 
 
 ### Implementation Guide
 
-We provide a Colab notebook example with step-by-step instructions. The examples used the smallest ESM-2 with 8 million parameters. Larger ESM-2 models can take more time. ESM-2 with 650M parameters took about a day on NVIDIA A100 GPU. 
+We provide Colab notebooks to reproduce selected results with step-by-step instructions. Please refer to the source code and the provided examples to reproduce other results that was not covered in examples.
+
+The examples used the smallest ESM-2 with 8M parameters. Larger ESM-2 models can take more time, which requires GPUs. ESM-2 with 650M parameters took about a day on a single NVIDIA A100 GPU for full fine-tuning. 
 
 
 #### Baselines
