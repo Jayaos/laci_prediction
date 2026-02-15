@@ -17,7 +17,7 @@ The codes were written in Python 3.9.13. If you want to implement on your local 
 
 ### Implementation Guide
 
-We provide Colab notebooks to reproduce selected results with step-by-step instructions. Please refer to the source code and the provided examples to reproduce other results that was not covered in examples.
+We provide Colab notebooks to reproduce selected experimental results with step-by-step instructions. Please refer to the source code and the provided examples to reproduce other results that were not covered in examples.
 
 The examples used the smallest ESM-2 with 8M parameters. Larger ESM-2 models can take more time, which requires GPUs. ESM-2 with 650M parameters took about a day on a single NVIDIA A100 GPU for full fine-tuning. 
 
@@ -48,8 +48,6 @@ The examples used the smallest ESM-2 with 8M parameters. Larger ESM-2 models can
 <a target="_blank" href="https://colab.research.google.com/github/Jayaos/LacI_prediction/blob/master/examples/full_finetune_example.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-
-
 
 
 ### How to Cite
