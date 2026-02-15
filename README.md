@@ -22,7 +22,7 @@ We provide Colab notebooks to reproduce selected experimental results with step-
 The examples used the smallest ESM-2 with 8M parameters. Larger ESM-2 models can take more time, which requires GPUs. ESM-2 with 650M parameters took about a day on a single NVIDIA A100 GPU for full fine-tuning. 
 
 
-#### Baselines
+#### Baselines: Linear model and MLP
 
 <a target="_blank" href="https://colab.research.google.com/github/Jayaos/LacI_prediction/blob/master/examples/baselines_example.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
