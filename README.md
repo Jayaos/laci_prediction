@@ -24,7 +24,7 @@ We provide a Colab notebook example with step-by-step instructions. The examples
 
 <a target="_blank" href="https://colab.research.google.com/github/Jayaos/LacI_prediction/blob/master/examples/zeroshot_example.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a
+</a>
 
 
 ## How to Cite
