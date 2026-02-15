@@ -1,4 +1,5 @@
 *.ipynb
+!examples/**/*.ipynb
 *.pyc
 data/DMS_ProteinGym_substitutions/
 data/garuss/
