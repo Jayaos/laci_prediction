@@ -20,11 +20,19 @@ The codes were written in Python 3.9.13. If you want to implement on your local 
 We provide a Colab notebook example with step-by-step instructions. The examples used the smallest ESM-2 with 8 million parameters. Larger ESM-2 models can take more time. ESM-2 with 650M parameters took about a day on NVIDIA A100 GPU. 
 
 
+### Baselines
+
+<a target="_blank" href="https://colab.research.google.com/github/Jayaos/LacI_prediction/blob/master/examples/baselines_example.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
+
 ### Zero-shot
 
 <a target="_blank" href="https://colab.research.google.com/github/Jayaos/LacI_prediction/blob/master/examples/zeroshot_example.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
+
 
 ### Head fine-tuning
 
@@ -32,17 +40,13 @@ We provide a Colab notebook example with step-by-step instructions. The examples
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
+
 ### Full fine-tuning
 
 <a target="_blank" href="https://colab.research.google.com/github/Jayaos/LacI_prediction/blob/master/examples/full_finetune_example.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-### Baselines
-
-<a target="_blank" href="https://colab.research.google.com/github/Jayaos/LacI_prediction/blob/master/examples/baselines_example.ipynb">
-  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
 
 
 
