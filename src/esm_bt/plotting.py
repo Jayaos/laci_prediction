@@ -137,12 +137,13 @@ def plot_nfold_label_vs_prediction_panels(
     fold_results,
     figsize=(7, 20),
     alpha=0.7,
-    s=20
+    s=20,
+    saving_dir=None
 ):
     """
-    Plot one panel per fold for ESM-BT model.
+    Plot one panel per fold (stacked vertically).
 
-    x-axis tick labels:
+    xticklabels:
     -1 -> nf
      1 -> R1
      2 -> R2
@@ -154,7 +155,7 @@ def plot_nfold_label_vs_prediction_panels(
     axes = axes.flatten()
 
     xtick_values = [-1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    xtick_labels = ["NF", "R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10"]
+    xtick_labels = ['NF', 'R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7', 'R8', 'R9', 'R10']
 
     for ax, fold_result in zip(axes, fold_results):
         fold = fold_result["fold"]
@@ -163,14 +164,16 @@ def plot_nfold_label_vs_prediction_panels(
 
         ax.scatter(labels, preds, alpha=alpha, s=s)
 
-        ax.set_xlabel("Label score")
-        ax.set_ylabel("Predicted mutation score")
+        ax.set_title(f"Fold {fold+1}")
+        ax.set_xlabel("Phenotype")
+        ax.set_ylabel("Score")
 
         ax.set_xticks(xtick_values)
         ax.set_xticklabels(xtick_labels)
-        ax.set_xlim(-1.5, 10.5)
 
         ax.grid(True, alpha=0.3)
 
     plt.tight_layout()
+    if saving_dir:
+        plt.savefig(saving_dir, bbox_inches="tight")
     plt.show()

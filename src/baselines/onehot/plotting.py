@@ -100,7 +100,8 @@ def plot_nfold_label_vs_prediction_panels(
     fold_results,
     figsize=(7, 20),
     alpha=0.7,
-    s=20
+    s=20,
+    saving_dir=None
 ):
     """
     Plot one panel per fold (stacked vertically).
@@ -127,7 +128,7 @@ def plot_nfold_label_vs_prediction_panels(
         ax.scatter(labels, preds, alpha=alpha, s=s)
 
         ax.set_title(f"Fold {fold+1}")
-        ax.set_xlabel("Ligand responsive group")
+        ax.set_xlabel("Phenotype")
         ax.set_ylabel("Score")
 
         ax.set_xticks(xtick_values)
@@ -136,4 +137,6 @@ def plot_nfold_label_vs_prediction_panels(
         ax.grid(True, alpha=0.3)
 
     plt.tight_layout()
+    if saving_dir:
+        plt.savefig(saving_dir, bbox_inches="tight")
     plt.show()

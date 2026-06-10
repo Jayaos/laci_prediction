@@ -7,7 +7,7 @@ from src.baselines.onehot.utils import *
 from src.constants import *
 from src.utils import *
 from torch.utils.data import Dataset, DataLoader
-from torchmetrics.classification import BinaryAUROC
+from torchmetrics.classification import BinaryAUROC, BinaryAveragePrecision
 from torchmetrics.regression import SpearmanCorrCoef
 
 
@@ -340,3 +340,84 @@ def nfold_evaluate_onehot_multiple_mutations(saved_dir, data_dir, score_computat
         print("std spearman corr: {}".format(np.std(test_metric_list)))
     
     return test_metric_list
+
+
+# code for addressing reviewers comments
+def evaluate_onehot_single_mutation_exp(testing_dataset, onehot_model):
+
+    testing_dataloader = DataLoader(testing_dataset, batch_size=1, shuffle=True, 
+                                       collate_fn=collate_function_onehot, drop_last=True)
+    
+    Sigmoid = torch.nn.Sigmoid()
+    AUROC_CRITERION = BinaryAUROC()
+    AUROC_CRITERION.reset()
+    PRAUC_CRITERION = BinaryAveragePrecision()
+    PRAUC_CRITERION.reset()
+    num_label_1 = 0
+    num_label_0 = 0
+
+    estimated = []
+    labels = []
+
+    onehot_model.eval()
+    for mutation_sequence_pair_batch, x_batch, label_batch in tqdm(testing_dataloader):
+
+            with torch.no_grad():
+                logits = onehot_model(x_batch) 
+                label_batch = label_batch.view(logits.size())
+                num_label_1 += (label_batch == 1).sum().item()
+                num_label_0 += (label_batch == 0).sum().item()
+                label_batch = label_batch.long()
+                probs = Sigmoid(logits)
+                AUROC_CRITERION.update(probs, label_batch)
+                PRAUC_CRITERION.update(probs, label_batch)
+                estimated.append(probs.item())
+                labels.append(label_batch.item())
+        
+    return AUROC_CRITERION.compute().item(), PRAUC_CRITERION.compute().item(), \
+        num_label_1 / (num_label_1+num_label_0), estimated, labels
+
+
+def nfold_evaluate_onehot_single_mutation_exp(saved_dir, data_dir, file_name):
+    """
+    evaluate n-fold saved models
+    """
+    result_dict = load_data(saved_dir + "onehot_result_dict.pkl")
+    nfold = result_dict["args"]["nfold"]
+    input_dim = len(AA2ID)*len(LACI_WT)
+    
+    auroc_list = []
+    prauc_list = []
+    label_ratio_list = []
+    data_nfold = np.array(load_nfold_data(data_dir, file_name, nfold)) # list of single folded split
+    nfold_idx = np.tile(np.arange(nfold),2)
+    probs_list = []
+    labels_list = []
+
+    for n in range(nfold):
+        
+        print("loading data...")
+        validation_idx = np.array(nfold_idx[n])
+        testing_idx = np.array(nfold_idx[n+1])
+        training_idx = np.array(nfold_idx[n+2:n+nfold])
+
+        testing_data = data_nfold[testing_idx]
+        testing_dataset = LacIDatasetOneHot(testing_data, AA2ID, ID2AA)
+        print("loading data done")
+
+        onehot_model = SimpleLinear(input_dim, 1)
+        onehot_model.load_state_dict(torch.load(saved_dir + "onehot_fold{}_model.pt".format(n)))
+        auroc, prauc, label_ratio, probs, labels = evaluate_onehot_single_mutation_exp(testing_dataset, onehot_model)
+        auroc_list.append(auroc)
+        prauc_list.append(prauc)
+        label_ratio_list.append(label_ratio)
+        probs_list.append(probs)
+        labels_list.append(labels)
+
+    print("avg AUC: {}".format(np.mean(auroc_list)))
+    print("std AUC: {}".format(np.std(auroc_list)))
+    print("avg PRAUC: {}".format(np.mean(prauc_list)))
+    print("std PRAUC: {}".format(np.std(prauc_list)))
+    print("avg label ratio: {}".format(np.mean(label_ratio_list)))
+
+    return probs_list, labels_list

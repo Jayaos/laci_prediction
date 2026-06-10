@@ -10,6 +10,7 @@ data/Ia9_heatmap.csv
 data/Ia9_single_mutation_data.pkl
 data/ross.csv
 data/wilson-ross-combined.csv
+data/laci
 old_notebooks/
 protein_moe/
 results/
